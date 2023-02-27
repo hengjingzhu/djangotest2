@@ -13,7 +13,7 @@ env:
   REGION: cn-shanghai                # 阿里云镜像地址   
   ACCESS_KEY_ID: ${{ secrets.ALIYUN_ACCESS_KEY }}      # 登陆阿里云ecs 服务器 id ，可以是 root,放在 secrets中
   ACCESS_KEY_SECRET: ${{ secrets.ALIYUN_SECRET_KEY }}   # 登陆阿里云 ecs 服务器 私钥，放在 secrets 中
-  ECS_CLUSTER_ID: ${{secrets.ALIYUN_HOST}}                        # 阿里云服务器地址
+  ECS_CLUSTER_ID:  ${{ secrets.ALIYUN_HOST }}                       # 阿里云服务器地址
 
 jobs:
   deploy:
@@ -72,25 +72,24 @@ jobs:
         # SOURCE: "./dist" # optional, default is 
         
         # Target directory,把当前的项目代码目标拷贝到Target目录 /opt/djangotest1
-        TARGET:  "/opt/djangotest1"
+        TARGET:  "/opt/djangotest2"
        
        
         #  登陆 阿里云镜像仓库,
         # 拉取刚刚推送的镜像，
-        # 把 /opt/djangotest1/docker-compose.yaml 文件中的 image 镜像修改成刚刚拉取的镜像
+        # 把 /opt/djangotest2/docker-compose.yaml 文件中的 image 镜像修改成刚刚拉取的镜像
         # 把之前的使用的镜像服务停掉删除
         # 删除标签为 <none> 的镜像
-        # 使用 /opt/djangotest1/docker-compose.yaml 启动新的镜像服务
+        # 使用 /opt/djangotest2/docker-compose.yaml 启动新的镜像服务
         SCRIPT_AFTER: |
           docker login --username=${{ secrets.ALIYUN_CONTAINER_REGISTRY_USERNAME }} registry.${{ env.REGION }}.aliyuncs.com --password=${{ secrets.ALIYUN_CONTAINER_REGISTRY_PASSWORD }}
           
           docker pull registry.${{ env.REGION }}.aliyuncs.com/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           
-          sed -i "s|image:.*|image: registry.${{ env.REGION }}.aliyuncs.com/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}|" /opt/djangotest1/docker-compose.yml
+          sed -i "s|image:.*|image: registry.${{ env.REGION }}.aliyuncs.com/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}|" /opt/djangotest2/docker-compose.yml
           
-          docker-compose -f /opt/djangotest1/docker-compose.yml down
+          docker-compose -f /opt/djangotest2/docker-compose.yml down
           
           docker image prune -f --filter "dangling=true"
           
-          docker-compose -f /opt/djangotest1/docker-compose.yml up -d
-        
+          docker-compose -f /opt/djangotest2/docker-compose.yml up -d
