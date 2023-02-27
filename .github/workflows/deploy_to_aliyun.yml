@@ -91,10 +91,9 @@ jobs:
           docker pull registry.${{ env.REGION }}.aliyuncs.com/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           
           sed -i "s|image:.*|image: registry.${{ env.REGION }}.aliyuncs.com/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}|" /opt/djangotest2/docker-compose.yml
-          sed -i "s|image:.*|image: registry.${{ env.REGION }}.aliyuncs.com/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}|" /opt/djangotest2/docker-compose.yml
           
           docker-compose -f /opt/djangotest2/docker-compose.yml down
-          docker-compose -f /opt/djangotest2/docker-compose.yml down
+          
           
           docker image prune -f --filter "dangling=true"
           
