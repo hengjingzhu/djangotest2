@@ -13,7 +13,7 @@ env:
   REGION: cn-shanghai                # 阿里云镜像地址   
   ACCESS_KEY_ID: ${{ secrets.ALIYUN_ACCESS_KEY }}      # 登陆阿里云ecs 服务器 id ，可以是 root,放在 secrets中
   ACCESS_KEY_SECRET: ${{ secrets.ALIYUN_SECRET_KEY }}   # 登陆阿里云 ecs 服务器 私钥，放在 secrets 中
-  ECS_CLUSTER_ID: ${{secrets.ALIYUN_HOST}}                        # 阿里云服务器地址
+  ECS_CLUSTER_ID: "47.100.18.252"                       # 阿里云服务器地址
 
 jobs:
   deploy:
