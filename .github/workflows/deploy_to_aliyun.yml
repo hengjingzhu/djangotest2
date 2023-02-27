@@ -73,7 +73,7 @@ jobs:
         
         # Target directory,把当前的项目代码目标拷贝到Target目录 /opt/djangotest1
         TARGET:  "/opt/djangotest2"
-        TARGET:  "/opt/djangotest2"
+      
        
        
         #  登陆 阿里云镜像仓库,
