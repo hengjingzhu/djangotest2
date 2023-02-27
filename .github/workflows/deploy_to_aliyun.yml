@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 env:
-  IMAGE_NAME: davidzhu/django-test1  # 镜像名，阿里云的镜像仓库命名规则
+  IMAGE_NAME: davidzhu/django-test2  # 镜像名，阿里云的镜像仓库命名规则
   IMAGE_TAG: v0.1.10                 # 镜像的版本号，   
   REGION: cn-shanghai                # 阿里云镜像地址   
   ACCESS_KEY_ID: ${{ secrets.ALIYUN_ACCESS_KEY }}      # 登陆阿里云ecs 服务器 id ，可以是 root,放在 secrets中
