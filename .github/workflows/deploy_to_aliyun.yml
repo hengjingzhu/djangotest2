@@ -72,25 +72,25 @@ jobs:
         # SOURCE: "./dist" # optional, default is 
         
         # Target directory,把当前的项目代码目标拷贝到Target目录 /opt/djangotest1
-        TARGET:  "/opt/djangotest1"
+        TARGET:  "/opt/djangotest2"
        
        
         #  登陆 阿里云镜像仓库,
         # 拉取刚刚推送的镜像，
-        # 把 /opt/djangotest1/docker-compose.yaml 文件中的 image 镜像修改成刚刚拉取的镜像
+        # 把 /opt/djangotest2/docker-compose.yaml 文件中的 image 镜像修改成刚刚拉取的镜像
         # 把之前的使用的镜像服务停掉删除
         # 删除标签为 <none> 的镜像
-        # 使用 /opt/djangotest1/docker-compose.yaml 启动新的镜像服务
+        # 使用 /opt/djangotest2/docker-compose.yaml 启动新的镜像服务
         SCRIPT_AFTER: |
           docker login --username=${{ secrets.ALIYUN_CONTAINER_REGISTRY_USERNAME }} registry.${{ env.REGION }}.aliyuncs.com --password=${{ secrets.ALIYUN_CONTAINER_REGISTRY_PASSWORD }}
           
           docker pull registry.${{ env.REGION }}.aliyuncs.com/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           
-          sed -i "s|image:.*|image: registry.${{ env.REGION }}.aliyuncs.com/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}|" /opt/djangotest1/docker-compose.yml
+          sed -i "s|image:.*|image: registry.${{ env.REGION }}.aliyuncs.com/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}|" /opt/djangotest2/docker-compose.yml
           
-          docker-compose -f /opt/djangotest1/docker-compose.yml down
+          docker-compose -f /opt/djangotest2/docker-compose.yml down
           
           docker image prune -f --filter "dangling=true"
           
-          docker-compose -f /opt/djangotest1/docker-compose.yml up -d
+          docker-compose -f /opt/djangotest2/docker-compose.yml up -d
         
