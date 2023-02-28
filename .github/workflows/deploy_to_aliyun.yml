@@ -82,6 +82,7 @@ jobs:
         # 把 /opt/djangotest2/docker-compose.yaml 文件中的 image 镜像修改成刚刚拉取的镜像
         # 把之前的使用的镜像服务停掉删除
         # 删除标签为 <none> 的镜像
+        # 删除原来的挂载的 static的文件夹，重新建立
         # 使用 /opt/djangotest2/docker-compose.yaml 启动新的镜像服务
         # 使用 /opt/djangotest2/docker-compose.yaml 启动新的镜像服务
         SCRIPT_AFTER: |
