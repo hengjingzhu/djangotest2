@@ -14,6 +14,7 @@ env:
   ACCESS_KEY_ID: ${{ secrets.ALIYUN_ACCESS_KEY }}      # 登陆阿里云ecs 服务器 id ，可以是 root,放在 secrets中
   ACCESS_KEY_SECRET: ${{ secrets.ALIYUN_SECRET_KEY }}   # 登陆阿里云 ecs 服务器 私钥，放在 secrets 中
   ECS_CLUSTER_ID:  ${{ secrets.ALIYUN_HOST }}                       # 阿里云服务器地址
+  DJANGO_SECRET_KEY: ${{secrets.DJANGO_SECRET_KEY}}
 
 jobs:
   deploy:
