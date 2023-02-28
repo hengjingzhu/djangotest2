@@ -16,4 +16,3 @@ WORKDIR /djangotest
 # 安装 requirements.txt 模块
 RUN python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
-RUN python manage.py collectstatic
