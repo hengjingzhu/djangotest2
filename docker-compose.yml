@@ -12,7 +12,7 @@ services:
       # 把静态文件夹目录挂载出来,方便 nginx 转发
       - /opt/djangotest2/djangostatic:/djangostatic
     ports:
-      - "8005:8000"
+      - "8004:8000"
     restart: always
 
      # 限制容器日志的大小
