@@ -129,4 +129,4 @@ STATICFILES_DIRS = [
     				'/app01/static/',]
 
 
-STATIC_ROOT = '/static'                    
+STATIC_ROOT = '/djangostatic'
