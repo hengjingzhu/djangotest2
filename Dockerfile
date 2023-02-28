@@ -1,6 +1,16 @@
 FROM python:3.6
+
+# Set build-time environment variable
+ARG DJANGO_SECRET_KEY
+
+# Set environment variables
+ENV DJANGO_SECRET_KEY $DJANGO_SECRET_KEY
+
+
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+
+
 
 LABEL version ="0.1"
 LABEL maintainer="David zhu"

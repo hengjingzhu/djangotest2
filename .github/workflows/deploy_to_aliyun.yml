@@ -14,7 +14,7 @@ env:
   ACCESS_KEY_ID: ${{ secrets.ALIYUN_ACCESS_KEY }}      # 登陆阿里云ecs 服务器 id ，可以是 root,放在 secrets中
   ACCESS_KEY_SECRET: ${{ secrets.ALIYUN_SECRET_KEY }}   # 登陆阿里云 ecs 服务器 私钥，放在 secrets 中
   ECS_CLUSTER_ID:  ${{ secrets.ALIYUN_HOST }}                       # 阿里云服务器地址
-  DJANGO_SECRET_KEY: ${{secrets.DJANGO_SECRET_KEY}}
+  DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
 
 jobs:
   deploy:
@@ -53,9 +53,12 @@ jobs:
         file: Dockerfile
         push: true
         tags: registry.${{ env.REGION }}.aliyuncs.com/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        build-args: |
+            DJANGO_SECRET_KEY=${{ env.DJANGO_SECRET_KEY }}
       env:
         DOCKER_USERNAME: ${{ secrets.ALIYUN_CONTAINER_REGISTRY_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.ALIYUN_CONTAINER_REGISTRY_PASSWORD }}
+      
     
     # 远程 ssh 连接 阿里云ecs 服务器并且部署
     - name: ssh deploy
