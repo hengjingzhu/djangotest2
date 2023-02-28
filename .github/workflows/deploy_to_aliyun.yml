@@ -86,8 +86,6 @@ jobs:
         # 使用 /opt/djangotest2/docker-compose.yaml 启动新的镜像服务
         SCRIPT_AFTER: |
           
-          rm -r -f /opt/djangotest2/djangostatic
-          mkdir /opt/djangotest2/djangostatic
 
           docker login --username=${{ secrets.ALIYUN_CONTAINER_REGISTRY_USERNAME }} registry.${{ env.REGION }}.aliyuncs.com --password=${{ secrets.ALIYUN_CONTAINER_REGISTRY_PASSWORD }}
           
@@ -99,5 +97,8 @@ jobs:
           
           
           docker image prune -f --filter "dangling=true"
-          
+
+          rm -r -f /opt/djangotest2/djangostatic
+          mkdir /opt/djangotest2/djangostatic
+
           docker-compose -f /opt/djangotest2/docker-compose.yml up -d
